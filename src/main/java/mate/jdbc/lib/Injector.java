@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+//Class Injector is never used
 public class Injector {
     private static final Map<String, Injector> injectors = new HashMap<>();
     private final List<Class<?>> classes = new ArrayList<>();
@@ -22,6 +23,7 @@ public class Injector {
         }
     }
 
+    //Method getInstance is never used
     public static Injector getInstance(String mainPackageName) {
         if (injectors.containsKey(mainPackageName)) {
             return injectors.get(mainPackageName);
@@ -31,6 +33,7 @@ public class Injector {
         return injector;
     }
 
+    //Method getInstance is never used
     public Object getInstance(Class<?> certainInterface) {
         Class<?> clazz = findClassExtendingInterface(certainInterface);
         return createInstance(clazz);

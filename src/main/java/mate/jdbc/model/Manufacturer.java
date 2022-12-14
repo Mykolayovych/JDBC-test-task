@@ -31,6 +31,7 @@ public class Manufacturer {
         return name;
     }
 
+    //Method setName is never used
     public void setName(String name) {
         this.name = name;
     }
@@ -39,6 +40,7 @@ public class Manufacturer {
         return country;
     }
 
+    //Method setCountry is never used
     public void setCountry(String country) {
         this.country = country;
     }

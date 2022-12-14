@@ -18,6 +18,8 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
         try (Connection connection = ConnectionUtil.getConnection();
                  PreparedStatement createStatement =
                          connection.prepareStatement(
+                                 //No data sources are configured to run this SQL and provide advanced code assistance
+                                 //You need to store each request in a separate variable
                              "INSERT INTO manufacturers(name, country) values(?,?);",
                              Statement.RETURN_GENERATED_KEYS)) {
             createStatement.setString(1, manufacturer.getName());
@@ -37,6 +39,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
     @Override
     public Manufacturer get(Long id) {
         Manufacturer manufacturer = new Manufacturer();
+        //No data sources are configured to run this SQL and provide advanced code assistance
         String getManufacturerRequest = "SELECT * FROM manufacturers WHERE id = ?";
         try (Connection connection = ConnectionUtil.getConnection();
                  PreparedStatement getStatement =
@@ -45,6 +48,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
             ResultSet resultSet = getStatement.executeQuery();
             if (resultSet.next()) {
                 Long idOfManufacturer = resultSet.getLong("id");
+                //resultSet.getObject("id", Long.class)
                 String name = resultSet.getString("name");
                 String country = resultSet.getString("country");
                 manufacturer = new Manufacturer(idOfManufacturer, name, country);
@@ -60,9 +64,12 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
     public List<Manufacturer> getAll() throws RuntimeException {
         List<Manufacturer> manufacturerList = new ArrayList<>();
         try (Connection connection = ConnectionUtil.getConnection();
+             //Use PreparedStatement over Statement
                  Statement getAllStatement = connection.createStatement()) {
             ResultSet resultSet = getAllStatement
                     .executeQuery(
+                            //No data sources are configured to run this SQL and provide advanced code assistance
+                            //You need to store each request in a separate variable
                         "SELECT manufacturers.id, manufacturers.name, manufacturers.country"
                         + "  FROM manufacturers WHERE is_deleted = 0");
             while (resultSet.next()) {
@@ -80,6 +87,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
 
     @Override
     public void delete(Long id) {
+        //No data sources are configured to run this SQL and provide advanced code assistance
         String deleteRequest = "UPDATE manufacturers SET is_deleted = 1 where id = ?";
         try (Connection connection = ConnectionUtil.getConnection();
                  PreparedStatement deleteStatement =
@@ -94,6 +102,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
 
     @Override
     public Manufacturer update(Manufacturer manufacturer) {
+        //No data sources are configured to run this SQL and provide advanced code assistance
         String updateRequest = "UPDATE manufacturers SET name = ?, country = ? WHERE id = ?";
         try (Connection connection = ConnectionUtil.getConnection();
                  PreparedStatement updateStatement =
